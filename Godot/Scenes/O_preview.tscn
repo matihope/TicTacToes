@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/O.png" type="Texture" id=1]
+
+[node name="O_preview" type="Sprite"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+position = Vector2( 100, 100 )
+texture = ExtResource( 1 )
