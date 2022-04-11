@@ -102,7 +102,8 @@ TicTacToe::TicTacToe(bool CPU_STARTS, bool MAKES_MISTAKES){
         }
         if(CPU_STARTS){
             cpu_plays_O = true;
-            make_move(-1, -1);
+            CPU_INITS = std::make_pair(rand() % 3, rand() % 3);
+            _my_board[CPU_INITS.first][CPU_INITS.second] = 2;
         }
     }
 

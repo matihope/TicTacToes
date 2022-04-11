@@ -1,4 +1,4 @@
 extends Node
 
-
-var X_turn = true
+var X_starts = true
+var player_starts = false

@@ -75,6 +75,10 @@ struct TicTacO: BaseGameObj{
             body.draw(circle);
             applyBody();
         }
+
+        TicTacO(std::pair<int, int> pos): BaseGameObj(sf::Vector2f(pos.first, pos.second)){
+            TicTacO(sf::Vector2f(pos.first, pos.second));
+        }
 };
 
 class Mouse{
@@ -103,7 +107,7 @@ int main()
     sf::VideoMode video_mode(600, 600);
     sf::RenderWindow window(video_mode, "TicTacToe");
     window.setVerticalSyncEnabled(true);
-    TicTacToe game(false, true);
+    TicTacToe game(true, false);
     Mouse mouse;
     bool run = true;
 
@@ -114,6 +118,10 @@ int main()
         {10, {0, 400}, {600, 400}}
     };
     vector<unique_ptr<BaseGameObj>> objects;
+    if(game.CPU_INITS != make_pair(-1, -1)){
+        objects.push_back(make_unique<TicTacO>(sf::Vector2f(game.CPU_INITS.second * 200 + 100, game.CPU_INITS.first * 200 + 100)));
+    }
+    cout << "STARTED" << endl;
     while (run) {
 
         sf::Event event;
@@ -130,7 +138,10 @@ int main()
                             break;
                         case sf::Keyboard::R:
                             objects.clear();
-                            game = TicTacToe(false, true);
+                            game = TicTacToe(true, false);
+                            if(game.CPU_INITS != make_pair(-1, -1)){
+                                objects.push_back(make_unique<TicTacO>(sf::Vector2f(game.CPU_INITS.second * 200 + 100, game.CPU_INITS.first * 200 + 100)));
+                            }
                             cout << "GAME: Restart" << endl;
                             break;
                     }

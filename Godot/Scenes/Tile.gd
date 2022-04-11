@@ -41,7 +41,7 @@ func set_pos(value: Array) -> void:
 
 
 func _on_Area2D_mouse_entered():
-	if Globals.X_turn:
+	if Globals.X_starts == Globals.player_starts:
 		self.tile_type = "X_preview"
 	else:
 		self.tile_type = "O_preview"
@@ -57,12 +57,11 @@ func _unhandled_input(event: InputEvent):
 		
 	if event is InputEventMouseButton:
 		if event.pressed:
-			if Globals.X_turn:
+			if Globals.player_starts == Globals.X_starts:
 				self.tile_type = "X"
 			else:
 				self.tile_type = "O"
 			applied = true
 			emit_signal("player_played", pos)
-			Globals.X_turn = !Globals.X_turn
 			get_tree().set_input_as_handled()
 		

@@ -25,4 +25,5 @@ struct TicTacToe{
 
     std::pair<int, int> _find_best_move();
     std::pair<int, int> make_move(int x, int y);
+    std::pair<int, int> CPU_INITS = {-1, -1};
 };

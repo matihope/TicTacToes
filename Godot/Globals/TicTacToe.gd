@@ -15,7 +15,7 @@ func find_most_optimal_move(board: Array) -> Array:
 				xes += 1
 	
 	var best = [0, 0]
-	var mini = 0
+	var mini = 3
 	for i in range(3):
 		for j in range(3):
 			if board[i][j] == 0:
@@ -24,9 +24,12 @@ func find_most_optimal_move(board: Array) -> Array:
 					board2[i][j] = 1
 				else:
 					board2[i][j] = 2
+#				print(boards[Hash(board2)])
 				if mini > boards[Hash(board2)]:
 					mini = boards[Hash(board2)]
 					best = [i, j]
+#			else:
+#				print('9')
 	
 	return best
 
@@ -54,17 +57,17 @@ func UnHash(ha: int) -> Array:
 	
 func check_win(board: Array) -> int:
 	for i in range(3):
-		if board[i][0] == board[i][1] and board[i][1] == board[i][2]:
+		if board[i][0] != 0 and board[i][0] == board[i][1] and board[i][1] == board[i][2]:
 			return 2
 		
 	for i in range(3):
-		if board[0][i] == board[1][i] and board[1][i] == board[2][i]:
+		if board[0][i] != 0 and board[0][i] == board[1][i] and board[1][i] == board[2][i]:
 			return 2
 			
-	if board[0][0] == board[1][1] and board[1][1] == board[2][2]:
+	if board[0][0] != 0 and board[0][0] == board[1][1] and board[1][1] == board[2][2]:
 		return 2
 		
-	if board[2][0] == board[1][1] and board[1][1] == board[0][2]:
+	if board[2][0] != 0 and board[2][0] == board[1][1] and board[1][1] == board[0][2]:
 		return 2
 		
 	for i in range(3):
@@ -75,9 +78,10 @@ func check_win(board: Array) -> int:
 	
 
 func gen(board: Array) -> void:
-	if boards[Hash(board)] != -1:
-		return
+#	print_board(board)
 	var my_hash = Hash(board)
+	if boards[my_hash] != -1:
+		return
 	var win = check_win(board)
 	if win:
 		boards[my_hash] = 2 - win
@@ -92,7 +96,7 @@ func gen(board: Array) -> void:
 			elif board[i][j] == 1:
 				xes += 1
 	
-	var mini = 2
+	var mini = 3
 	for i in range(3):
 		for j in range(3):
 			if board[i][j] == 0:
